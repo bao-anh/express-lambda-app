@@ -27,7 +27,7 @@ phases:
         cp -R node_modules "$ARTIFACT_DIR"/node_modules
         (cd "$ARTIFACT_DIR" && zip -r ../function.zip .)
   post_build:
-    commands:
+    commands: 
       - echo "Publishing new Lambda version..."
       - CURRENT_VERSION=$(aws lambda get-alias --function-name "$FUNCTION_NAME" --name "$LAMBDA_ALIAS" --query 'FunctionVersion' --output text 2>/dev/null || echo "")
       - aws lambda update-function-code --function-name "$FUNCTION_NAME" --zip-file fileb://function.zip
