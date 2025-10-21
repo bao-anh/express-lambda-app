@@ -62,7 +62,7 @@ The CloudFormation template in `infra/pipeline.yaml` creates:
 
 - CodeCommit repository (delete or comment this resource out if you plan to reference an existing repo).
 - S3 buckets for pipeline artifacts and packaged Lambda assets.
-- CodeBuild project that runs `buildspec.yml` (`npm install`, tests, SAM build/package).
+- CodeBuild project that runs `buildspec.yml` (installs deps, runs tests, publishes a new Lambda function version, and rewrites `appspec.yml` with the latest version number).
 - CodePipeline with Source → Build → Deploy stages.
 - IAM roles for CodeBuild, CodePipeline, and CloudFormation deployment.
 
@@ -76,6 +76,8 @@ aws cloudformation deploy \
 ```
 
 Once the stack completes, pushing to the `main` branch of the CodeCommit repository triggers the pipeline, builds the app, packages the Lambda with SAM, and updates the target CloudFormation stack defined by the `DeployStackName` parameter.
+
+During the CodeBuild phase the script produces `function.zip`, updates the Lambda code directly (`aws lambda update-function-code`), publishes a new immutable version, and regenerates `appspec.yml` so CodeDeploy can shift the deployment alias (default `live`) to the freshly created version. Customize the target function or alias by overriding the `FUNCTION_NAME` and `LAMBDA_ALIAS` environment variables on the CodeBuild project.
 
 > **Note:** The application stack created from `template.yaml` now accepts a `CodeAssetUri` parameter. Leave it at the default (`.`) when deploying with the SAM CLI; set it to the S3 URI of the packaged artifact (for example, `s3://my-bucket/express-lambda-app.zip`) when deploying the template directly through CloudFormation or CodePipeline without running `sam package`.
 

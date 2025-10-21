@@ -1,17 +1,37 @@
 version: 0.2
 
+env:
+  variables:
+    FUNCTION_NAME: "express-lambda-app"
+    LAMBDA_ALIAS: "live"
+
 phases:
   install:
     runtime-versions:
       nodejs: 18
     commands:
-      - npm install
+      - npm ci
+  pre_build:
+    commands:
+      - npm test
+      - npm prune --omit=dev
   build:
     commands:
-      - echo "Zipping source code..."
-      - zip -r function.zip lambda.js appspec.yml
-
-artifacts:
-  files:
-    - function.zip
-    - appspec.yml
+      - echo "Preparing deployment artifact..."
+      - |
+        ARTIFACT_DIR=artifact
+        rm -rf "$ARTIFACT_DIR"
+        mkdir -p "$ARTIFACT_DIR"
+        cp lambda.js package.json package-lock.json "$ARTIFACT_DIR"/
+        cp -R src "$ARTIFACT_DIR"/src
+        cp -R node_modules "$ARTIFACT_DIR"/node_modules
+        (cd "$ARTIFACT_DIR" && zip -r ../function.zip .)
+  post_build:
+    commands:
+      - echo "Publishing new Lambda version..."
+      - CURRENT_VERSION=$(aws lambda get-alias --function-name "$FUNCTION_NAME" --name "$LAMBDA_ALIAS" --query 'FunctionVersion' --output text 2>/dev/null || echo "")
+      - aws lambda update-function-code --function-name "$FUNCTION_NAME" --zip-file fileb://function.zip
+      - NEW_VERSION=$(aws lambda publish-version --function-name "$FUNCTION_NAME" --query 'Version' --output text)
+      - |
+        if [ "$CURRENT_VERSION" = "None" ] || [ -z "$CURRENT_VERSION" ]; then
+          cat <<EOF > appspec.yml

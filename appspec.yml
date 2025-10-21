@@ -5,5 +5,4 @@ Resources:
       Properties:
         Name: "express-lambda-app"
         Alias: "live"
-        CurrentVersion: "1"
-        TargetVersion: "2"
+        TargetVersion: "REPLACED_DURING_BUILD"
