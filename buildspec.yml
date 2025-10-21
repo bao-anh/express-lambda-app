@@ -8,11 +8,10 @@ phases:
       - npm install
   build:
     commands:
-      - npm test
-      - sam build --template-file template.yaml --cached
-      - aws cloudformation package --template-file template.yaml --output-template-file template-out.yaml --s3-bucket bao-anh-express-lambda-app
+      - echo "Zipping source code..."
+      - zip -r function.zip lambda.js appspec.yml
 
 artifacts:
   files:
-    - packaged.yaml
-    - template.yaml
+    - function.zip
+    - appspec.yml
