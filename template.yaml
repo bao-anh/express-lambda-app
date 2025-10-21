@@ -19,7 +19,7 @@ Resources:
     Properties:
       FunctionName: express-lambda-app
       Handler: lambda.handler
-      CodeUri: .
+      CodeUri: bao-anh-express-lambda-app
       Description: Express application packaged for AWS Lambda
       Events:
         ApiGatewayProxy:

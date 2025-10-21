@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    PACKAGE_BUCKET: "bao-anh-express-lambda-app "
+    PACKAGE_BUCKET: "bao-anh-express-lambda-app"
 
 phases:
   install:
