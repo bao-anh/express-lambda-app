@@ -1,24 +1,16 @@
 Transform: AWS::Serverless-2016-10-31
 Description: Express API deployed on AWS Lambda behind Amazon API Gateway
 
-Globals:
-  Function:
-    Runtime: nodejs18.x
-    Timeout: 10
-    MemorySize: 128
-    Architectures:
-      - x86_64
-    Environment:
-      Variables:
-        NODE_OPTIONS: --enable-source-maps
-
 Resources:
   ExpressFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: express-lambda-app
       Handler: lambda.handler
-      CodeUri: ./
+      CodeUri: s3://bao-anh-express-lambda-app/002c7bb59a88447e3be86214a8a0b1a9.zip
+      Runtime: nodejs18.x
+      Timeout: 10
+      MemorySize: 128
       Description: Express application packaged for AWS Lambda
       Events:
         ApiGatewayProxy:
