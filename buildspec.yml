@@ -1,0 +1,30 @@
+version: 0.2
+
+env:
+  variables:
+    PACKAGE_BUCKET: ""
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install -g aws-sam-cli
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm test
+      - sam build --template-file template.yaml --cached
+      - sam package --template-file .aws-sam/build/template.yaml --s3-bucket $PACKAGE_BUCKET --output-template-file packaged.yaml
+
+artifacts:
+  files:
+    - packaged.yaml
+    - template.yaml
+  discard-paths: yes
+
+cache:
+  paths:
+    - node_modules/**/*

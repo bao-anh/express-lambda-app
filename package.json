@@ -1,0 +1,25 @@
+{
+  "name": "express-lambda-app",
+  "version": "0.1.0",
+  "description": "Express API deployed on AWS Lambda with CodeCommit-backed CI/CD",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec node server.js",
+    "start": "node server.js",
+    "lambda:serve": "sam local start-api",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@vendia/serverless-express": "^4.10.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
