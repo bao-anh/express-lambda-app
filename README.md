@@ -2,6 +2,9 @@
 
 This project bootstraps an [Express](https://expressjs.com/) API that runs on AWS Lambda and exposes routes through Amazon API Gateway. It ships with an AWS SAM template for deployment, an AWS CodeBuild build specification, and a CloudFormation template that provisions a CodeCommit-driven CI/CD pipeline.
 
+## Guide
+https://www.youtube.com/watch?v=6SSLBfOZOtQ
+
 ## Prerequisites
 
 - Node.js 18+
