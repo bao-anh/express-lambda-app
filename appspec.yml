@@ -6,4 +6,5 @@ Resources:
         Name: "express-lambda-app"
         Alias: "live"
         CurrentVersion: "1"
-        TargetVersion: "1"
+        TargetVersion:
+          - "1"
