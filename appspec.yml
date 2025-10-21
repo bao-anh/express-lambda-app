@@ -1,10 +1,9 @@
 version: 0.0
 Resources:
-  ExpressLambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Name: "express-lambda-app"
-      Alias: "live"
-      CurrentVersion: "1"
-      TargetVersions:
-        - "1"
+  - ExpressLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: "express-lambda-app"
+        Alias: "live"
+        CurrentVersion: "1"
+        TargetVersions: "1"
