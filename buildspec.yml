@@ -16,8 +16,3 @@ artifacts:
   files:
     - packaged.yaml
     - template.yaml
-  discard-paths: yes
-
-cache:
-  paths:
-    - node_modules/**/*

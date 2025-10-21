@@ -8,8 +8,7 @@ Resources:
       FunctionName: express-lambda-app
       Handler: lambda.handler
       CodeUri: s3://bao-anh-express-lambda-app/002c7bb59a88447e3be86214a8a0b1a9.zip
-      Runtime: nodejs18.x
-      Timeout: 10
+      Runtime: nodejs22.x
       MemorySize: 128
       Description: Express application packaged for AWS Lambda
       Events:
