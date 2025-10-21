@@ -34,7 +34,8 @@ Package and deploy the Lambda/API Gateway stack with the SAM CLI:
 sam build
 sam deploy --guided \
   --stack-name express-lambda-app \
-  --capabilities CAPABILITY_IAM
+  --capabilities CAPABILITY_IAM \
+  --parameter-overrides CodeAssetUri=.
 ```
 
 The stack exports the API endpoint URL as the `ApiUrl` output.
@@ -69,6 +70,8 @@ aws cloudformation deploy \
 ```
 
 Once the stack completes, pushing to the `main` branch of the CodeCommit repository triggers the pipeline, builds the app, packages the Lambda with SAM, and updates the target CloudFormation stack defined by the `DeployStackName` parameter.
+
+> **Note:** The application stack created from `template.yaml` now accepts a `CodeAssetUri` parameter. Leave it at the default (`.`) when deploying with the SAM CLI; set it to the S3 URI of the packaged artifact (for example, `s3://my-bucket/express-lambda-app.zip`) when deploying the template directly through CloudFormation or CodePipeline without running `sam package`.
 
 ## Local Lambda Emulation
 
