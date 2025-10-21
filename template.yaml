@@ -1,4 +1,3 @@
-AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: Express API deployed on AWS Lambda behind Amazon API Gateway
 
@@ -32,8 +31,3 @@ Resources:
           Properties:
             Path: /
             Method: ANY
-
-Outputs:
-  ApiUrl:
-    Description: Base URL for the Express API
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

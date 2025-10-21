@@ -10,7 +10,7 @@ phases:
     commands:
       - npm test
       - sam build --template-file template.yaml --cached
-      - aws cloudformation package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket bao-anh-express-lambda-app
+      - aws cloudformation package --template-file template.yaml --output-template-file template-out.yaml --s3-bucket bao-anh-express-lambda-app
 
 artifacts:
   files:
