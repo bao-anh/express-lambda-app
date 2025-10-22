@@ -8,7 +8,7 @@ app.use("/health", healthRouter);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Welcome to the Express API running on AWS Lambda.",
+    message: "Hello world, Welcome to the Express API running on AWS Lambda.",
   });
 });
 
