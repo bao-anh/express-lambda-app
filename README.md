@@ -7,6 +7,7 @@ This project bootstraps an [Express](https://expressjs.com/) API that runs on AW
 - Guild to setup Lambda with Code pipeline
 https://www.youtube.com/watch?v=6SSLBfOZOtQ
 https://www.youtube.com/watch?v=7HNcaDEktE4
+https://www.youtube.com/watch?v=AmHZxULclLQ
 
 ## Prerequisites
 

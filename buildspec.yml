@@ -9,7 +9,11 @@ phases:
   build:
     commands:
       - echo "Zipping source code..."
-      - zip -r function.zip lambda.js appspec.yml
+      - zip -r function.zip node_modules lambda.js src package.json package-lock.json appspec.yml
+  post_build:
+    commands:
+      - echo "Updating Lambda function code..."
+      - aws lambda update-function-code --function-name express-lambda-app --zip-file fileb://function.zip
 
 artifacts:
   files:
